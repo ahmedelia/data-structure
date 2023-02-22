@@ -1,0 +1,54 @@
+public class IntList {
+	public int first;
+	public IntList rest;
+    
+	public IntList(int f, IntList r) {
+		first = f;
+		rest = r;
+	}
+	 	public void addLast(int x) {
+
+ 		IntList head = this;
+ 		IntList p = this;
+        while (head != null){
+            IntList tmp2 = head.rest;
+	        IntList tmp = new IntList(head.first*head.first, head.rest);
+	        head.rest = tmp;
+	        head = tmp2;
+	    }
+	    while (p.rest != null) {
+ 			p = p.rest;
+ 		}
+ 		p.rest = new IntList(x, null);
+ 	}
+	public void printList(){
+ 	    IntList head = this;
+ 	    while (head != null){
+ 	        System.out.print(head.first + " ");
+ 	        head = head.rest;
+ 	    }
+	}
+	private void Adjacent(IntList head){
+	    if (head == null)
+	        return;
+	    while (head != null){
+	        if (head.rest != null && head.first == head.rest.first){
+	            head.first *= 2;
+	            head.rest = (head.rest).rest;
+	            Adjacent(head);
+	        }
+	        head = head.rest;
+	    }
+	}
+	public void Add_Adjacent(){
+	    Adjacent(this);
+	}
+	public static void main(String[] args) {
+ 	/* Creates a list of one integer, namely 10 */
+ 	IntList x = new IntList(2, null);
+ 	x = new IntList(1, x);
+ 	x.addLast(5);
+ 	x.addLast(7);
+ 	x.printList();
+ 	}
+}
